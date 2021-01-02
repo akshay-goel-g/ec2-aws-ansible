@@ -1,0 +1,15 @@
+- name: Subnet Creation
+  ec2_vpc_subnet:
+     aws_access_key: "{{ aws_id }}"
+     aws_secret_key: "{{ aws_key }}"
+     state: present
+     vpc_id: "{{ ansibleVPC.vpc.id }}"
+     cidr: 10.0.0.0/16
+     region: "{{ aws_region }}"
+     map_public: yes
+  register: ansibleSubnet
+
+- name: Subnet Output
+  debug:
+     var: ansibleSubnet
+

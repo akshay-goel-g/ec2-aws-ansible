@@ -1,0 +1,14 @@
+- name: Initalizing VPC
+  ec2_vpc_net:
+    aws_access_key: "{{ aws_id }}"
+    aws_secret_key: "{{ aws_key }}"
+    region: "{{ aws_region }}"
+    name: vpc_ansible
+    cidr_block: 10.0.0.0/16
+    tenancy: default
+  register: ansibleVPC
+
+- name: VPC Output
+  debug:
+    var: ansibleVPC
+

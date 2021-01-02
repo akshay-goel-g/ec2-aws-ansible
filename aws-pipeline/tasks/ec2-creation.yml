@@ -1,0 +1,22 @@
+- name: Creating EC2 instance
+  ec2:
+          region: "{{ aws_region }}"
+          instance_type: t2.micro
+          image: ami-08f63db601b82ff5f
+          wait: yes
+          group: "{{ ansibleSG.group_name }}"
+          count: 1
+          vpc_subnet_id: "{{ ansibleSubnet.subnet.id }}"
+          assign_public_ip: yes
+          aws_secret_key: "{{ aws_key }}"
+          aws_access_key: "{{ aws_id }}"
+          key_name: "{{ ssh_keyname }}"
+          user_data: "{{ lookup('file', 'user_data.sh') }}"
+          instance_tags:
+                  Name: ansible_ec2
+  register: ansibleEC2
+
+- name : Displaying ec2 instance details
+  debug:
+          var: ansibleEC2
+

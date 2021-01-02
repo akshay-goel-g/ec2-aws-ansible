@@ -1,0 +1,9 @@
+---
+# tasks file for aws-pipeline
+
+- include: vpc-creation.yml
+- include: subnet-creation.yml
+- include: igw-creation.yml
+- include: route-creation.yml
+- include: securityGrp-creation.yml
+- include: ec2-creation.yml

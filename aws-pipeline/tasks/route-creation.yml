@@ -1,0 +1,20 @@
+- name: Creating a route table
+  ec2_vpc_route_table:
+          aws_access_key: "{{ aws_id }}"
+          aws_secret_key: "{{ aws_key }}"
+          vpc_id: "{{ ansibleVPC.vpc.id}}"
+          region: "{{ aws_region }}"
+          state: present
+          tags:
+                  Name: "ansible route table"
+          subnets: 
+                - "{{ ansibleSubnet.subnet.id }}"
+          routes:
+                  - dest: 0.0.0.0/0
+                    gateway_id: "{{ ansibleIGW.gateway_id }}"
+  register: ansibleRT
+
+- name: Route table details
+  debug:
+          var: ansibleRT
+
